@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>倒计时</title>
+</head>
+<script type="text/javascript">
+
+function DownTime(){
+	STTime();
+	SHTime();
+	}
+
+function STTime(){
+	if(TimerRunning)
+	clearTimeout(TimerID);
+	var TimerRunning = false;
+	}
+
+function array(){
+	this.length = 12;
+	this[0]=31;this[1]=28;this[2]=31;this[3]=30;this[4]=31;this[5]=30;
+	this[6]=31;this[7]=31;this[8]=30;this[9]=31;this[10]=30;this[11]=31;
+	}
+	
+var CClock = new array();
+
+function SHTime(){
+	today=new Date();
+	var CurrentMonth = today.getMonth();
+	var CurrentDate = today.getDate();
+	var CurrentYear = today.getFullYear();
+	now = null;
+	if(21 < CurrentDate){CurrentDate -= CClock[CurrentMonth];CurrentMonth++;}
+	if(7<CurrentMonth){CurrentMonth -= 12;CurrentYear++;}
+	var Yearleft=2025-CurrentYear;
+	var Monthleft=1-CurrentMonth+12;
+	var Dateleft=1-CurrentDate;
+	document.YMD.a.value=Yearleft;
+	document.YMD.b.value=Monthleft;
+	document.YMD.c.value=Dateleft;
+	TimerID=setTimeout('SHTime()',1000);
+	TimerRunning=true;
+	}
+	
+</script>
+<body bgcolor="#fef4d2" onload=DownTime()>
+<br><br>
+<center>
+<font color="ffaafa"><h2>倒计时</h2></font>
+<hr width=300>
+<br><br>
+<form name='YMD' action="" method="get">
+距离2025年1月1日只剩下
+<input type='text' name='a' size=3 value="">年
+<input type='text' name='b' size=3 value="">月
+<input type='text' name='c' size=3 value="">日
+</form>
+</body>
+</html>
